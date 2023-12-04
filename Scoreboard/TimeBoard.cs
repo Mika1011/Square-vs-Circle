@@ -24,7 +24,6 @@ namespace Game.ScoreBoards
             updateUI(savedTimes);
         }
 
-        [ContextMenu("Add Test Entry")]
         public void addEntryToBoard()
         {
             ScoreBoardEntryData entryData = new ScoreBoardEntryData
