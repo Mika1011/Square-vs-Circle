@@ -18,12 +18,11 @@ namespace Game.ScoreBoards
         private void Start()
         {
             ScoreBoardSaveData savedTimes = getSavedTime();
-
             saveScores(savedTimes);
-
             updateUI(savedTimes);
         }
 
+        [ContextMenu("Add Test Entry")]
         public void addEntryToBoard()
         {
             ScoreBoardEntryData entryData = new ScoreBoardEntryData
@@ -87,12 +86,13 @@ namespace Game.ScoreBoards
                 File.Create(SavePath).Dispose();
                 return new ScoreBoardSaveData();
             }
-
-            using (StreamReader stream = new StreamReader(SavePath))
             {
-                string json = stream.ReadToEnd();
+                using (StreamReader stream = new StreamReader(SavePath))
+                {
+                    string json = stream.ReadToEnd();
 
-                return JsonUtility.FromJson<ScoreBoardSaveData>(json);
+                    return JsonUtility.FromJson<ScoreBoardSaveData>(json);
+                }
             }
         }
 

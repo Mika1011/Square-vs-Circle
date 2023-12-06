@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering.PostProcessing;
@@ -11,12 +11,24 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject optionsMenu;
     [SerializeField] private GameObject levelSelectMenu;
-    [SerializeField] private Toggle effects;
-    [SerializeField] private GameObject cameraPrefab;
+    [SerializeField] private Toggle effectToggle;
+    [SerializeField] private GameObject mainCamera;
     [SerializeField] private Button enterNameButtonPrefab;
-    [SerializeField] private List<Button> levelSelectButton = new List<Button>();
     [SerializeField] private AudioMixer mixer;
-    [SerializeField] Slider audioSlider;
+    [SerializeField] private Slider audioSlider;
+    [SerializeField] private PostProcessProfile ppp;
+
+    private void Start()
+    {
+        if (PlayerPrefs.GetInt("PPPOn") == 1)
+        {
+            effectToggle.isOn = true;
+        } else if (PlayerPrefs.GetInt("PPPOn") == 0)
+        {
+            effectToggle.isOn = false;
+        }
+    }
+
     public void play()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -38,14 +50,14 @@ public class MainMenu : MonoBehaviour
     }
     public void effectSwitch()
     {
-        if(effects.isOn == true)
+        if(effectToggle.isOn == true)
         {
-            Camera.main.GetComponent<PostProcessLayer>().enabled = true;
-            cameraPrefab.GetComponent<PostProcessLayer>().enabled = true;
-        } else if(effects.isOn == false) 
+            PlayerPrefs.SetInt("PPPOn", 1);
+            mainCamera.GetComponent<MainCamera>().ChangePostProcessing();
+        } else if(effectToggle.isOn == false)
         {
-            Camera.main.GetComponent<PostProcessLayer>().enabled = false;
-            cameraPrefab.GetComponent<PostProcessLayer>().enabled = false;
+            PlayerPrefs.SetInt("PPPOn", 0);
+            mainCamera.GetComponent<MainCamera>().ChangePostProcessing();
         }
     }
     public void scoreBoardButton()
