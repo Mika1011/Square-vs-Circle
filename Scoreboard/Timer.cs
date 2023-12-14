@@ -9,10 +9,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private TMP_Text currentTimeText;
 
     private bool stopTime = false;
-    void Start()
-    {
-        currentTime = startMinutes * 60;
-    }
+    
     void Update()
     {
         if (stopTime == false)
