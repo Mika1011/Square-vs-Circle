@@ -5,7 +5,6 @@ using TMPro;
 public class Timer : MonoBehaviour
 {
     private float currentTime;
-    private int startMinutes;
     [SerializeField] private TMP_Text currentTimeText;
 
     private bool stopTime = false;
