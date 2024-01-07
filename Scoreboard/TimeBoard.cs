@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace Game.ScoreBoards
 {
-    public class TimeBoard : MonoBehaviour
+    public class ScoreBoard : MonoBehaviour
     {
         [SerializeField] private int maxTimeBoardEntries = 5;
         [SerializeField] private Transform timeScoreHolderTransform;
